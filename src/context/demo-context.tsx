@@ -4,13 +4,17 @@ import React, { createContext, useContext, useState, useCallback, ReactNode } fr
 import { EngineId, ActNumber, DemoProgress, SDLCStage } from '@/types'
 
 interface DemoContextType {
-  progress: DemoProgress
+  progress: DemoProgress & {
+    currentStage: SDLCStage
+    completedStages: SDLCStage[]
+  }
   currentSDLCStage: SDLCStage
   setCurrentEngine: (engineId: EngineId) => void
   completeAct: (actNumber: ActNumber) => void
   completeEngine: (engineId: EngineId) => void
   resetProgress: () => void
   advanceSDLCStage: () => void
+  isEngineCompleted: (engineId: EngineId) => boolean
 }
 
 const initialProgress: DemoProgress = {
@@ -67,16 +71,38 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     }
   }, [currentSDLCStage])
 
+  const isEngineCompleted = useCallback((engineId: EngineId): boolean => {
+    return progress.completedEngines.includes(engineId)
+  }, [progress.completedEngines])
+
+  // Calculate completed stages based on completed engines
+  const getCompletedStages = (): SDLCStage[] => {
+    const stages: SDLCStage[] = []
+    if (progress.completedEngines.includes(1)) stages.push('discovery')
+    if (progress.completedEngines.includes(2)) stages.push('design')
+    if (progress.completedEngines.includes(3)) stages.push('develop')
+    if (progress.completedEngines.includes(4)) stages.push('deploy')
+    return stages
+  }
+
+  // Extended progress with computed stage properties
+  const extendedProgress = {
+    ...progress,
+    currentStage: currentSDLCStage,
+    completedStages: getCompletedStages(),
+  }
+
   return (
     <DemoContext.Provider
       value={{
-        progress,
+        progress: extendedProgress,
         currentSDLCStage,
         setCurrentEngine,
         completeAct,
         completeEngine,
         resetProgress,
         advanceSDLCStage,
+        isEngineCompleted,
       }}
     >
       {children}
