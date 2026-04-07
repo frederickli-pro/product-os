@@ -17,4 +17,11 @@ export interface SDLCStepperProps {
   currentStage: 'discovery' | 'design' | 'develop' | 'deploy'
   completedStages: string[]
   contextMessage?: string
+  contextBadge?: string // Alias for contextMessage for backward compatibility
+}
+
+export interface WelcomeOverlayProps {
+  isOpen: boolean
+  onClose: () => void
+  onStartDemo: () => void
 }

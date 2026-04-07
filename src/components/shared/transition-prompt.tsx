@@ -8,11 +8,23 @@ import Link from 'next/link'
 
 interface TransitionPromptProps {
   message: string
-  nextHref: string
+  nextHref?: string
   nextLabel?: string
+  onContinue?: () => void // Callback-based navigation support
 }
 
-export function TransitionPrompt({ message, nextHref, nextLabel = 'Continue' }: TransitionPromptProps) {
+export function TransitionPrompt({ message, nextHref, nextLabel = 'Continue', onContinue }: TransitionPromptProps) {
+  const buttonContent = (
+    <Button
+      variant="secondary"
+      className="bg-white text-vista-primary hover:bg-vista-light flex items-center gap-2"
+      onClick={onContinue}
+    >
+      {nextLabel}
+      <ArrowRight className="w-4 h-4" />
+    </Button>
+  )
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -26,15 +38,13 @@ export function TransitionPrompt({ message, nextHref, nextLabel = 'Continue' }: 
           <p className="text-lg font-medium mb-1">{message}</p>
           <p className="text-sm text-vista-light/80">Click to proceed to the next phase</p>
         </div>
-        <Link href={nextHref}>
-          <Button
-            variant="secondary"
-            className="bg-white text-vista-primary hover:bg-vista-light flex items-center gap-2"
-          >
-            {nextLabel}
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </Link>
+        {nextHref ? (
+          <Link href={nextHref}>
+            {buttonContent}
+          </Link>
+        ) : (
+          buttonContent
+        )}
       </div>
     </motion.div>
   )

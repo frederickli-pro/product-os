@@ -9,6 +9,7 @@ export interface SDLCStepperProps {
   currentStage: 'discovery' | 'design' | 'develop' | 'deploy'
   completedStages: string[]
   contextMessage?: string
+  contextBadge?: string // Alias for contextMessage for backward compatibility
 }
 
 const stages = [
@@ -18,7 +19,9 @@ const stages = [
   { id: 'deploy', label: 'Deploy' },
 ]
 
-export function SDLCStepper({ currentStage, completedStages, contextMessage }: SDLCStepperProps) {
+export function SDLCStepper({ currentStage, completedStages, contextMessage, contextBadge }: SDLCStepperProps) {
+  // Support both contextMessage and contextBadge props
+  const displayMessage = contextMessage || contextBadge
   return (
     <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-4">
       <div className="flex items-center justify-between">
@@ -74,10 +77,10 @@ export function SDLCStepper({ currentStage, completedStages, contextMessage }: S
           )
         })}
       </div>
-      {contextMessage && (
+      {displayMessage && (
         <div className="mt-4 text-center">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-vista-light text-vista-primary">
-            {contextMessage}
+            {displayMessage}
           </span>
         </div>
       )}

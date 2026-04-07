@@ -6,11 +6,14 @@ import { EngineId, ActNumber, DemoProgress, SDLCStage } from '@/types'
 interface DemoContextType {
   progress: DemoProgress
   currentSDLCStage: SDLCStage
+  completedStages: string[]
   setCurrentEngine: (engineId: EngineId) => void
   completeAct: (actNumber: ActNumber) => void
   completeEngine: (engineId: EngineId) => void
   resetProgress: () => void
   advanceSDLCStage: () => void
+  isEngineCompleted: (engineId: EngineId) => boolean
+  isActCompleted: (actNumber: ActNumber) => boolean
 }
 
 const initialProgress: DemoProgress = {
@@ -67,16 +70,38 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     }
   }, [currentSDLCStage])
 
+  const isEngineCompleted = useCallback((engineId: EngineId) => {
+    return progress.completedEngines.includes(engineId)
+  }, [progress.completedEngines])
+
+  const isActCompleted = useCallback((actNumber: ActNumber) => {
+    return progress.completedActs.includes(actNumber)
+  }, [progress.completedActs])
+
+  // Derive completed SDLC stages from completed engines
+  // Engine 1 = discovery, Engine 2 = design, Engine 3 = develop, Engine 4 = deploy
+  const engineToStage: Record<EngineId, SDLCStage> = {
+    1: 'discovery',
+    2: 'design',
+    3: 'develop',
+    4: 'deploy'
+  }
+
+  const completedStages = progress.completedEngines.map(id => engineToStage[id])
+
   return (
     <DemoContext.Provider
       value={{
         progress,
         currentSDLCStage,
+        completedStages,
         setCurrentEngine,
         completeAct,
         completeEngine,
         resetProgress,
         advanceSDLCStage,
+        isEngineCompleted,
+        isActCompleted,
       }}
     >
       {children}

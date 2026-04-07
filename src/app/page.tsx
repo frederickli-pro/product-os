@@ -30,6 +30,8 @@ export default function DashboardHub() {
   const router = useRouter();
   const {
     progress,
+    currentSDLCStage,
+    completedStages,
     setCurrentEngine,
     isEngineCompleted,
   } = useDemoContext();
@@ -84,7 +86,7 @@ export default function DashboardHub() {
       develop: 'Prioritization reasoning carried to execution',
       deploy: 'Governance connected to every upstream decision',
     };
-    return stageMessages[progress.currentStage];
+    return stageMessages[currentSDLCStage];
   };
 
   return (
@@ -114,8 +116,8 @@ export default function DashboardHub() {
         {/* SDLC Stepper */}
         <section>
           <SDLCStepper
-            currentStage={progress.currentStage}
-            completedStages={progress.completedStages}
+            currentStage={currentSDLCStage}
+            completedStages={completedStages}
             contextMessage={getContextMessage()}
           />
         </section>

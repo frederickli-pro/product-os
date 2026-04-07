@@ -106,7 +106,7 @@ export function EngineQuadrant({
               <div>
                 <CardTitle className="text-lg">Engine {engine.id}</CardTitle>
                 <CardDescription className="text-xs uppercase tracking-wide">
-                  Act {engine.actNumber} • {stageLabels[engine.id]}
+                  Act {engine.actNumber || engine.act} • {stageLabels[engine.id]}
                 </CardDescription>
               </div>
             </div>

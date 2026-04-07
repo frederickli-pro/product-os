@@ -1,6 +1,6 @@
 export type EngineId = 1 | 2 | 3 | 4
 export type ActNumber = 1 | 2 | 3 | 4
-export type EngineStatus = 'locked' | 'active' | 'completed'
+export type EngineStatus = 'locked' | 'active' | 'completed' | 'available'
 export type SDLCStage = 'discovery' | 'design' | 'develop' | 'deploy'
 
 export interface DemoProgress {
@@ -15,9 +15,12 @@ export interface DemoProgress {
 export interface Engine {
   id: EngineId
   name: string
+  shortName?: string
   description: string
   status: EngineStatus
-  act: ActNumber
+  act?: ActNumber
+  actNumber?: ActNumber // Alias for backward compatibility
+  previewContent?: string
 }
 
 export interface SDLCStep {
