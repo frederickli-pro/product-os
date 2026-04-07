@@ -46,55 +46,9 @@
     --vista-blue-primary: #0052CC;
     --vista-teal-primary: #00B8D9;
     --vista-green-primary: #36B37E;
-    --vista-yellow-primary: #FFAB00;
+    --vista-yellow-primary: #B38600;
     --vista-red-primary: #FF5630;
     --vista-slate-primary: #7A869A;
-
-    /* Typography Scale */
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-
-    /* Spacing Scale */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.25rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-10: 2.5rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-
-    /* Transitions */
-    --transition-fast: 150ms;
-    --transition-normal: 200ms;
-    --transition-slow: 300ms;
-  }
-
-  /* Dark mode support (optional) */
-  .dark {
-    --background: 213 37% 8%;
-    --foreground: 210 40% 98%;
-    --card: 213 37% 12%;
-    --card-foreground: 210 40% 98%;
-    --primary: 189 100% 43%;
-    --primary-foreground: 213 37% 8%;
-    --secondary: 213 37% 16%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 213 37% 16%;
-    --muted-foreground: 215 16% 65%;
-    --accent: 189 100% 43%;
-    --accent-foreground: 0 0% 100%;
-    --border: 213 37% 20%;
-    --input: 213 37% 20%;
-    --ring: 189 100% 43%;
   }
 }
 
@@ -116,57 +70,38 @@
 
   /* Typography baseline */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-vista-navy;
+    letter-spacing: -0.025em;
+    color: var(--vista-navy-primary);
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
-  h1 {
-    @apply text-4xl font-bold leading-tight;
-  }
-
-  h2 {
-    @apply text-3xl font-semibold leading-tight;
-  }
-
-  h3 {
-    @apply text-2xl font-semibold leading-snug;
-  }
-
-  h4 {
-    @apply text-xl font-medium leading-snug;
-  }
-
-  h5 {
-    @apply text-lg font-medium;
-  }
-
-  h6 {
-    @apply text-base font-medium;
-  }
+  h1 { font-size: 2.25rem; font-weight: 700; line-height: 1.2; }
+  h2 { font-size: 1.875rem; font-weight: 600; line-height: 1.25; }
+  h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.35; }
+  h4 { font-size: 1.25rem; font-weight: 500; line-height: 1.4; }
+  h5 { font-size: 1.125rem; font-weight: 500; }
+  h6 { font-size: 1rem; font-weight: 500; }
 
   p {
-    @apply text-vista-slate-700 leading-relaxed;
-  }
-
-  /* Link styles */
-  a {
-    @apply text-vista-blue hover:text-vista-blue-600 transition-colors duration-200;
+    color: var(--vista-slate-primary);
+    line-height: 1.625;
   }
 
   /* Focus states for accessibility */
   :focus-visible {
-    @apply outline-none ring-2 ring-vista-teal ring-offset-2 ring-offset-background;
+    outline: none;
+    box-shadow: 0 0 0 2px var(--vista-teal-primary), 0 0 0 4px white;
   }
 
   /* Selection styles */
   ::selection {
-    @apply bg-vista-teal/20 text-vista-navy;
+    background-color: rgba(0, 184, 217, 0.2);
+    color: var(--vista-navy-primary);
   }
 }
 
 @layer components {
-  /* ========================================
-     VISTA GRADIENTS
-     ======================================== */
+  /* Vista Gradients */
   .vista-gradient {
     background: linear-gradient(135deg, #0D2847 0%, #1E3A5F 50%, #2B5A8A 100%);
   }
@@ -179,11 +114,6 @@
     background: linear-gradient(90deg, #00B8D9 0%, #36B37E 100%);
   }
 
-  .vista-gradient-text {
-    @apply bg-clip-text text-transparent;
-    background: linear-gradient(90deg, #00B8D9 0%, #36B37E 100%);
-  }
-
   /* Mesh gradient background */
   .vista-mesh-bg {
     background:
@@ -193,219 +123,36 @@
       linear-gradient(135deg, #FAFBFC 0%, #F4F5F7 100%);
   }
 
-  /* ========================================
-     VISTA CARDS & PANELS
-     ======================================== */
+  /* Vista Card */
   .vista-card {
-    @apply bg-white rounded-vista shadow-vista border border-vista-slate-200/50 transition-all duration-200;
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px 0 rgba(13, 40, 71, 0.08), 0 1px 2px -1px rgba(13, 40, 71, 0.08);
+    border: 1px solid rgba(235, 236, 240, 0.5);
+    transition: all 200ms;
   }
 
   .vista-card:hover {
-    @apply shadow-vista-md border-vista-slate-300/50;
+    box-shadow: 0 4px 6px -1px rgba(13, 40, 71, 0.08), 0 2px 4px -2px rgba(13, 40, 71, 0.08);
   }
 
-  .vista-card-elevated {
-    @apply bg-white rounded-vista shadow-vista-lg border border-vista-slate-100;
-  }
-
+  /* Vista Panel */
   .vista-panel {
-    @apply bg-white rounded-xl shadow-vista-md p-6 border border-vista-slate-100;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(13, 40, 71, 0.08), 0 2px 4px -2px rgba(13, 40, 71, 0.08);
+    padding: 1.5rem;
+    border: 1px solid #F4F5F7;
   }
 
-  .vista-panel-header {
-    @apply flex items-center justify-between pb-4 mb-4 border-b border-vista-slate-100;
-  }
-
-  .vista-panel-title {
-    @apply text-lg font-semibold text-vista-navy flex items-center gap-2;
-  }
-
-  /* ========================================
-     VISTA BUTTONS
-     ======================================== */
-  .vista-btn {
-    @apply inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-vista transition-all duration-200;
-  }
-
-  .vista-btn-primary {
-    @apply vista-btn bg-vista-navy text-white hover:bg-vista-navy-600 active:bg-vista-navy-800 shadow-vista-sm;
-  }
-
-  .vista-btn-secondary {
-    @apply vista-btn bg-vista-slate-100 text-vista-navy hover:bg-vista-slate-200 active:bg-vista-slate-300;
-  }
-
-  .vista-btn-accent {
-    @apply vista-btn bg-vista-teal text-white hover:bg-vista-teal-600 active:bg-vista-teal-700 shadow-vista-sm;
-  }
-
-  .vista-btn-ghost {
-    @apply vista-btn bg-transparent text-vista-navy hover:bg-vista-slate-100 active:bg-vista-slate-200;
-  }
-
-  .vista-btn-outline {
-    @apply vista-btn border-2 border-vista-navy text-vista-navy bg-transparent hover:bg-vista-navy hover:text-white;
-  }
-
-  /* ========================================
-     VISTA BADGES & TAGS
-     ======================================== */
-  .vista-badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-  }
-
-  .vista-badge-default {
-    @apply vista-badge bg-vista-slate-100 text-vista-slate-700;
-  }
-
-  .vista-badge-success {
-    @apply vista-badge bg-vista-green-50 text-vista-green-700;
-  }
-
-  .vista-badge-warning {
-    @apply vista-badge bg-vista-yellow-50 text-vista-yellow-700;
-  }
-
-  .vista-badge-error {
-    @apply vista-badge bg-vista-red-50 text-vista-red-700;
-  }
-
-  .vista-badge-info {
-    @apply vista-badge bg-vista-teal-50 text-vista-teal-700;
-  }
-
-  .vista-badge-primary {
-    @apply vista-badge bg-vista-navy/10 text-vista-navy;
-  }
-
-  /* ========================================
-     VISTA FORM ELEMENTS
-     ======================================== */
-  .vista-input {
-    @apply w-full px-4 py-2.5 text-sm bg-white border border-vista-slate-200 rounded-vista;
-    @apply placeholder:text-vista-slate-400 text-vista-navy;
-    @apply focus:outline-none focus:ring-2 focus:ring-vista-teal/20 focus:border-vista-teal;
-    @apply transition-all duration-200;
-  }
-
-  .vista-input-label {
-    @apply block text-sm font-medium text-vista-navy mb-1.5;
-  }
-
-  .vista-input-helper {
-    @apply text-xs text-vista-slate-500 mt-1;
-  }
-
-  /* ========================================
-     VISTA STATUS INDICATORS
-     ======================================== */
-  .vista-status-dot {
-    @apply w-2 h-2 rounded-full;
-  }
-
-  .vista-status-active {
-    @apply vista-status-dot bg-vista-green animate-pulse-soft;
-  }
-
-  .vista-status-pending {
-    @apply vista-status-dot bg-vista-yellow;
-  }
-
-  .vista-status-inactive {
-    @apply vista-status-dot bg-vista-slate-300;
-  }
-
-  .vista-status-error {
-    @apply vista-status-dot bg-vista-red;
-  }
-
-  /* ========================================
-     VISTA PROGRESS INDICATORS
-     ======================================== */
-  .vista-progress-bar {
-    @apply h-2 bg-vista-slate-100 rounded-full overflow-hidden;
-  }
-
-  .vista-progress-fill {
-    @apply h-full bg-vista-gradient-accent rounded-full transition-all duration-500 ease-out;
-  }
-
-  /* ========================================
-     VISTA DIVIDERS
-     ======================================== */
+  /* Vista Dividers */
   .vista-divider {
-    @apply border-t border-vista-slate-100;
+    border-top: 1px solid #F4F5F7;
   }
 
   .vista-divider-gradient {
-    @apply h-px bg-gradient-to-r from-transparent via-vista-slate-200 to-transparent;
-  }
-
-  /* ========================================
-     VISTA ENGINE INDICATORS
-     ======================================== */
-  .vista-engine-badge {
-    @apply inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold;
-  }
-
-  .vista-engine-1 {
-    @apply vista-engine-badge bg-vista-blue-50 text-vista-blue-600 border border-vista-blue-200;
-  }
-
-  .vista-engine-2 {
-    @apply vista-engine-badge bg-vista-teal-50 text-vista-teal-600 border border-vista-teal-200;
-  }
-
-  .vista-engine-3 {
-    @apply vista-engine-badge bg-vista-green-50 text-vista-green-600 border border-vista-green-200;
-  }
-
-  .vista-engine-4 {
-    @apply vista-engine-badge bg-vista-navy/10 text-vista-navy border border-vista-navy/20;
-  }
-
-  /* ========================================
-     VISTA ANIMATIONS
-     ======================================== */
-  .vista-animate-in {
-    @apply animate-fade-in;
-  }
-
-  .vista-slide-up {
-    @apply animate-slide-up;
-  }
-
-  .vista-scale-in {
-    @apply animate-scale-in;
-  }
-
-  /* ========================================
-     VISTA UTILITIES
-     ======================================== */
-  .vista-text-gradient {
-    @apply bg-clip-text text-transparent bg-vista-gradient-accent;
-  }
-
-  .vista-border-accent {
-    @apply border-l-4 border-vista-teal;
-  }
-
-  .vista-highlight {
-    @apply bg-vista-yellow-50 px-1 rounded;
-  }
-
-  /* Scrollbar styling */
-  .vista-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .vista-scrollbar::-webkit-scrollbar-track {
-    @apply bg-vista-slate-100 rounded-full;
-  }
-
-  .vista-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-vista-slate-300 rounded-full hover:bg-vista-slate-400;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #DFE1E6, transparent);
   }
 }
 
@@ -413,18 +160,5 @@
   /* Text balance for headings */
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Safe area insets for mobile */
-  .safe-area-inset {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-
-  /* Container queries support */
-  .container-type-inline {
-    container-type: inline-size;
   }
 }
