@@ -1,40 +1,29 @@
-/**
- * Shared type definitions for the Portfolio AI Accountability Playbook.
- *
- * This file contains types used across multiple modules.
- */
-
-export type EngineId = 1 | 2 | 3 | 4;
-export type EngineStatus = 'locked' | 'available' | 'active' | 'completed';
-export type ActNumber = 1 | 2 | 3 | 4;
-export type SDLCStage = 'discovery' | 'design' | 'develop' | 'deploy';
+export type EngineId = 1 | 2 | 3 | 4
+export type ActNumber = 1 | 2 | 3 | 4
+export type EngineStatus = 'locked' | 'active' | 'completed'
+export type SDLCStage = 'discovery' | 'design' | 'develop' | 'deploy'
 
 export interface DemoProgress {
-  currentEngine: EngineId;
-  currentAct: ActNumber;
-  completedActs: ActNumber[];
-  completedEngines: EngineId[];
-  currentStage: SDLCStage;
-  completedStages: SDLCStage[];
+  currentEngine: EngineId
+  completedEngines: EngineId[]
+  currentAct: ActNumber
+  completedActs: ActNumber[]
+  startedAt: Date | null
+  completedAt: Date | null
 }
 
 export interface Engine {
-  id: EngineId;
-  name: string;
-  shortName: string;
-  description: string;
-  status: EngineStatus;
-  actNumber: ActNumber;
-  previewContent?: string;
+  id: EngineId
+  name: string
+  description: string
+  status: EngineStatus
+  act: ActNumber
 }
 
-export interface TransitionPrompt {
-  fromEngine: EngineId;
-  toEngine: EngineId;
-  message: string;
-}
-
-export interface ContextBadge {
-  label: string;
-  description?: string;
+export interface SDLCStep {
+  stage: SDLCStage
+  label: string
+  isActive: boolean
+  isCompleted: boolean
+  contextMessage?: string
 }

@@ -8,7 +8,7 @@
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83% 40%;
+    --primary: 212 57% 24%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -18,7 +18,7 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83% 40%;
+    --ring: 212 57% 24%;
     --radius: 0.5rem;
   }
 }
@@ -29,12 +29,20 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .vista-gradient {
+    background: linear-gradient(135deg, #1E3A5F 0%, #2E5A8F 50%, #4A90C2 100%);
+  }
+
+  .vista-card {
+    @apply bg-white rounded-lg shadow-md border border-gray-100;
+  }
+
+  .vista-panel {
+    @apply bg-white rounded-xl shadow-lg p-6;
   }
 }

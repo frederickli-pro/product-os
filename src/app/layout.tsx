@@ -1,33 +1,24 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { DemoProvider } from "@/context/demo-context";
-import { ThemeProvider } from "@/context/theme-context";
-import { TooltipProvider } from "@/components/ui/tooltip";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next'
+import './globals.css'
+import { DemoProvider } from '@/context/demo-context'
 
 export const metadata: Metadata = {
-  title: "Product Operating System | Vista",
-  description: "Vista-branded Product Operating System demo showcasing four engines: Diagnostic, Prioritization, Execution, and Governance.",
-};
+  title: 'Product Operating System',
+  description: 'Portfolio AI Accountability Playbook - Vista Product Operating System Demo',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          <DemoProvider>
-            <TooltipProvider>
-              {children}
-            </TooltipProvider>
-          </DemoProvider>
-        </ThemeProvider>
+      <body className="font-sans antialiased min-h-screen bg-gray-50">
+        <DemoProvider>
+          {children}
+        </DemoProvider>
       </body>
     </html>
-  );
+  )
 }

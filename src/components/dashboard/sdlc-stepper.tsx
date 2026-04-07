@@ -1,56 +1,49 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { SDLCStepperProps } from '@/types/engine';
-import { SDLCStage } from '@/types';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Check } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-const stages: { stage: SDLCStage; label: string }[] = [
-  { stage: 'discovery', label: 'Discovery' },
-  { stage: 'design', label: 'Design' },
-  { stage: 'develop', label: 'Develop' },
-  { stage: 'deploy', label: 'Deploy' },
-];
+export interface SDLCStepperProps {
+  currentStage: 'discovery' | 'design' | 'develop' | 'deploy'
+  completedStages: string[]
+  contextMessage?: string
+}
 
-export function SDLCStepper({
-  currentStage,
-  completedStages,
-  contextMessage,
-  contextBadge,
-}: SDLCStepperProps) {
-  const currentIndex = stages.findIndex((s) => s.stage === currentStage);
+const stages = [
+  { id: 'discovery', label: 'Discovery' },
+  { id: 'design', label: 'Design' },
+  { id: 'develop', label: 'Develop' },
+  { id: 'deploy', label: 'Deploy' },
+]
 
+export function SDLCStepper({ currentStage, completedStages, contextMessage }: SDLCStepperProps) {
   return (
-    <div className="w-full bg-white rounded-lg shadow-sm border p-4" data-testid="sdlc-stepper">
-      <div className="flex items-center justify-between mb-3">
-        {stages.map((step, index) => {
-          const isCompleted = completedStages.includes(step.stage);
-          const isActive = step.stage === currentStage;
-          const isPast = index < currentIndex;
+    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-4">
+      <div className="flex items-center justify-between">
+        {stages.map((stage, index) => {
+          const isCompleted = completedStages.includes(stage.id)
+          const isActive = stage.id === currentStage
+          const isLast = index === stages.length - 1
 
           return (
-            <React.Fragment key={step.stage}>
+            <React.Fragment key={stage.id}>
               <div className="flex flex-col items-center">
                 <motion.div
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
                   className={cn(
                     'w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors',
                     isCompleted
                       ? 'bg-green-500 text-white'
                       : isActive
-                      ? 'bg-vista-blue text-white ring-4 ring-vista-blue/20'
+                      ? 'bg-vista-primary text-white ring-4 ring-vista-light'
                       : 'bg-gray-200 text-gray-500'
                   )}
-                  initial={{ scale: 1 }}
-                  animate={{ scale: isActive ? 1.1 : 1 }}
-                  transition={{ duration: 0.2 }}
-                  data-testid={`stage-${step.stage}`}
-                  data-completed={isCompleted}
-                  data-active={isActive}
                 >
                   {isCompleted ? (
-                    <Check className="w-5 h-5" data-testid={`checkmark-${step.stage}`} />
+                    <Check className="w-5 h-5" />
                   ) : (
                     index + 1
                   )}
@@ -58,42 +51,36 @@ export function SDLCStepper({
                 <span
                   className={cn(
                     'mt-2 text-sm font-medium',
-                    isActive ? 'text-vista-blue' : isCompleted ? 'text-green-600' : 'text-gray-500'
+                    isActive ? 'text-vista-primary' : 'text-gray-500'
                   )}
                 >
-                  {step.label}
+                  {stage.label}
                 </span>
+                {isActive && (
+                  <span className="text-xs text-vista-accent mt-1">(active)</span>
+                )}
               </div>
-              {index < stages.length - 1 && (
+              {!isLast && (
                 <div
                   className={cn(
-                    'flex-1 h-1 mx-2 rounded transition-colors',
-                    isPast || isCompleted ? 'bg-green-500' : 'bg-gray-200'
+                    'flex-1 h-1 mx-2 rounded',
+                    completedStages.includes(stages[index + 1]?.id) || isCompleted
+                      ? 'bg-green-500'
+                      : 'bg-gray-200'
                   )}
-                  aria-hidden="true"
                 />
               )}
             </React.Fragment>
-          );
+          )
         })}
       </div>
-
-      {contextBadge && (
-        <div className="flex justify-center mt-3">
-          <span
-            className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-vista-blue/10 text-vista-blue"
-            data-testid="context-badge"
-          >
-            {contextBadge}
+      {contextMessage && (
+        <div className="mt-4 text-center">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-vista-light text-vista-primary">
+            {contextMessage}
           </span>
         </div>
       )}
-
-      {contextMessage && (
-        <p className="text-center text-sm text-gray-600 mt-2" data-testid="context-message">
-          {contextMessage}
-        </p>
-      )}
     </div>
-  );
+  )
 }
