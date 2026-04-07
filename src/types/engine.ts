@@ -18,3 +18,9 @@ export interface SDLCStepperProps {
   completedStages: string[]
   contextMessage?: string
 }
+
+export interface WelcomeOverlayProps {
+  isOpen: boolean
+  onClose: () => void
+  onStartDemo: () => void
+}

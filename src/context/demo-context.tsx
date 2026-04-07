@@ -15,6 +15,7 @@ interface DemoContextType {
   resetProgress: () => void
   advanceSDLCStage: () => void
   isEngineCompleted: (engineId: EngineId) => boolean
+  isActCompleted: (actNumber: ActNumber) => boolean
 }
 
 const initialProgress: DemoProgress = {
@@ -75,6 +76,10 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     return progress.completedEngines.includes(engineId)
   }, [progress.completedEngines])
 
+  const isActCompleted = useCallback((actNumber: ActNumber): boolean => {
+    return progress.completedActs.includes(actNumber)
+  }, [progress.completedActs])
+
   // Calculate completed stages based on completed engines
   const getCompletedStages = (): SDLCStage[] => {
     const stages: SDLCStage[] = []
@@ -103,6 +108,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
         resetProgress,
         advanceSDLCStage,
         isEngineCompleted,
+        isActCompleted,
       }}
     >
       {children}

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Header } from '@/components/layout/header';
 import { SDLCStepper } from '@/components/dashboard/sdlc-stepper';
@@ -20,14 +19,9 @@ import {
 } from '@/data/mock/initiatives';
 
 export default function Engine2Page() {
-  const router = useRouter();
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(
     initiatives[0]
   );
-
-  const handleContinue = () => {
-    router.push('/engine-3');
-  };
 
   return (
     <div className="min-h-screen bg-gray-50" data-testid="engine-2-page">
@@ -56,7 +50,7 @@ export default function Engine2Page() {
           <SDLCStepper
             currentStage="design"
             completedStages={['discovery']}
-            contextBadge="Diagnostic insights inform prioritization"
+            contextMessage="Diagnostic insights inform prioritization"
           />
         </motion.div>
 
@@ -128,7 +122,7 @@ export default function Engine2Page() {
         >
           <TransitionPrompt
             message="Priority set. Now watch the transformation into shipped product."
-            onContinue={handleContinue}
+            nextHref="/engine-3"
           />
         </motion.div>
       </main>
