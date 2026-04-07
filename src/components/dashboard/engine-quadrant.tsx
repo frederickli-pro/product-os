@@ -140,7 +140,7 @@ export function EngineQuadrant({
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
-          <h3 className="font-semibold text-base">{engine.name}</h3>
+          <p className="font-semibold text-base">{engine.name}</p>
           <p className="text-sm text-muted-foreground line-clamp-2">
             {engine.description}
           </p>

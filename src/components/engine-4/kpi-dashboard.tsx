@@ -81,8 +81,11 @@ function KPICard({ metric, index }: { metric: KPIMetric, index: number }) {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button className="text-gray-400 hover:text-vista-primary transition-colors">
-                    <Info className="w-4 h-4" />
+                  <button
+                    className="text-gray-400 hover:text-vista-primary transition-colors"
+                    aria-label={`View reasoning for ${metric.name}`}
+                  >
+                    <Info className="w-4 h-4" aria-hidden="true" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="left" className="max-w-xs">
