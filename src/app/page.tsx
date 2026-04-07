@@ -1,101 +1,194 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+/**
+ * Dashboard Hub - Main landing page for the Product Operating System.
+ * Owner: Scenario 1 - Dashboard Hub Navigation
+ *
+ * Features:
+ * - Four engine quadrants in 2x2 grid layout
+ * - Welcome overlay for first-time users
+ * - SDLC progress stepper
+ * - Progress bar indicator
+ * - Jump to engine navigation
+ */
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { Layers, Sparkles } from 'lucide-react';
+import { EngineQuadrant } from '@/components/dashboard/engine-quadrant';
+import { WelcomeOverlay } from '@/components/dashboard/welcome-overlay';
+import { ProgressBar } from '@/components/dashboard/progress-bar';
+import { SDLCStepper } from '@/components/dashboard/sdlc-stepper';
+import { useDemoContext } from '@/context/demo-context';
+import { engines } from '@/data/mock/engines';
+import { EngineId, SDLCStage } from '@/types';
+
+const STORAGE_KEY = 'demo_first_visit';
+
+export default function DashboardHub() {
+  const router = useRouter();
+  const {
+    progress,
+    setCurrentEngine,
+    isEngineCompleted,
+  } = useDemoContext();
+
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
+
+  useEffect(() => {
+    // Check if this is first visit
+    const visited = localStorage.getItem(STORAGE_KEY);
+    if (!visited) {
+      setShowWelcome(true);
+      setIsFirstVisit(true);
+    } else {
+      setIsFirstVisit(false);
+    }
+  }, []);
+
+  const handleEngineClick = (engineId: EngineId) => {
+    setCurrentEngine(engineId);
+    router.push(`/engine-${engineId}`);
+  };
+
+  const handleCloseWelcome = () => {
+    setShowWelcome(false);
+    localStorage.setItem(STORAGE_KEY, 'true');
+    setIsFirstVisit(false);
+  };
+
+  const handleStartDemo = () => {
+    setShowWelcome(false);
+    localStorage.setItem(STORAGE_KEY, 'true');
+    setIsFirstVisit(false);
+    handleEngineClick(1);
+  };
+
+  const isEngineActive = (engineId: EngineId): boolean => {
+    return progress.currentEngine === engineId;
+  };
+
+  // Get context message based on current state
+  const getContextMessage = (): string => {
+    if (progress.completedEngines.length === 0) {
+      return 'Start with Engine 1 to begin your diagnostic assessment';
+    }
+    if (progress.completedEngines.length === 4) {
+      return 'From discovery to deployment — one shared context, zero handoff loss';
+    }
+    const stageMessages: Record<SDLCStage, string> = {
+      discovery: 'Current-state assessment in progress',
+      design: 'Diagnostic insights inform prioritization',
+      develop: 'Prioritization reasoning carried to execution',
+      deploy: 'Governance connected to every upstream decision',
+    };
+    return stageMessages[progress.currentStage];
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
+      {/* Header */}
+      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-vista-blue text-white">
+                <Layers className="h-5 w-5" />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold">Product Operating System</h1>
+                <p className="text-xs text-muted-foreground">Portfolio AI Accountability Playbook</p>
+              </div>
+            </div>
+            <div className="hidden md:block text-right">
+              <p className="text-sm text-muted-foreground">Powered by</p>
+              <p className="text-sm font-semibold">[PE Firm] Value Creation</p>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </header>
+
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        {/* SDLC Stepper */}
+        <section>
+          <SDLCStepper
+            currentStage={progress.currentStage}
+            completedStages={progress.completedStages}
+            contextMessage={getContextMessage()}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </section>
+
+        {/* Progress Bar */}
+        <section>
+          <ProgressBar
+            completedActs={progress.completedActs}
+            currentAct={progress.currentAct}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        </section>
+
+        {/* Hero Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center py-6"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <h2 className="text-3xl font-bold mb-4">
+            The Four-Engine Operating System
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            From customer insight to customer outcomes, much faster.
+            One platform. Empowered teams. Shared context. Complete lifecycle.
+          </p>
+        </motion.section>
+
+        {/* Engine Quadrants - 2x2 Grid */}
+        <section
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          data-testid="engine-grid"
+        >
+          {engines.map((engine) => (
+            <EngineQuadrant
+              key={engine.id}
+              engine={engine}
+              isActive={isEngineActive(engine.id)}
+              isCompleted={isEngineCompleted(engine.id)}
+              onClick={handleEngineClick}
+              showStartHere={engine.id === 1 && isFirstVisit && progress.completedEngines.length === 0}
+            />
+          ))}
+        </section>
+
+        {/* Value Proposition */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-center py-8 border-t"
+        >
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles className="h-5 w-5 text-vista-blue" />
+            <span className="text-sm font-medium text-vista-blue uppercase tracking-wide">
+              Unified Platform
+            </span>
+          </div>
+          <p className="text-lg font-medium max-w-3xl mx-auto">
+            &ldquo;Every PE firm has playbooks. [PE Firm] can have a system that executes
+            those playbooks — and gets smarter every time it runs.&rdquo;
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            One platform. 90+ portfolio companies. Compounding intelligence with every engagement.
+          </p>
+        </motion.section>
+      </div>
+
+      {/* Welcome Overlay */}
+      <WelcomeOverlay
+        isOpen={showWelcome}
+        onClose={handleCloseWelcome}
+        onStartDemo={handleStartDemo}
+      />
+    </main>
   );
 }
