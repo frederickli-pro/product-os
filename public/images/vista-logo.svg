@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 48" fill="none">
+  <defs>
+    <linearGradient id="vistaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D2847"/>
+      <stop offset="50%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5A8A"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00B8D9"/>
+      <stop offset="100%" stop-color="#36B37E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Vista Mark - Geometric V with ascending bars -->
+  <g transform="translate(4, 8)">
+    <!-- Left ascending bar -->
+    <rect x="0" y="12" width="5" height="20" rx="1" fill="url(#vistaGrad)"/>
+    <!-- Center V shape -->
+    <polygon points="10,32 18,12 26,32 22,32 18,22 14,32" fill="url(#vistaGrad)"/>
+    <!-- Right ascending bar -->
+    <rect x="31" y="8" width="5" height="24" rx="1" fill="url(#vistaGrad)"/>
+    <!-- Top accent line -->
+    <rect x="0" y="4" width="36" height="3" rx="1.5" fill="url(#accentGrad)"/>
+  </g>
+
+  <!-- VISTA wordmark -->
+  <g fill="#0D2847" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="26" letter-spacing="2">
+    <text x="52" y="34">VISTA</text>
+  </g>
+
+  <!-- Equity Partners subtext -->
+  <g fill="#5E6C84" font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="8" letter-spacing="3">
+    <text x="52" y="44">EQUITY PARTNERS</text>
+  </g>
+</svg>
