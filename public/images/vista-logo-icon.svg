@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="vistaGradIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D2847"/>
+      <stop offset="50%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#2B5A8A"/>
+    </linearGradient>
+    <linearGradient id="accentGradIcon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00B8D9"/>
+      <stop offset="100%" stop-color="#36B37E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="#FAFBFC"/>
+  <circle cx="24" cy="24" r="22" stroke="url(#vistaGradIcon)" stroke-width="1.5" fill="none"/>
+
+  <!-- Vista Mark centered -->
+  <g transform="translate(6, 10)">
+    <!-- Left ascending bar -->
+    <rect x="4" y="14" width="5" height="18" rx="1" fill="url(#vistaGradIcon)"/>
+    <!-- Center V shape -->
+    <polygon points="13,32 20,14 27,32 23.5,32 20,23 16.5,32" fill="url(#vistaGradIcon)"/>
+    <!-- Right ascending bar -->
+    <rect x="31" y="10" width="5" height="22" rx="1" fill="url(#vistaGradIcon)"/>
+    <!-- Top accent line -->
+    <rect x="4" y="6" width="32" height="3" rx="1.5" fill="url(#accentGradIcon)"/>
+  </g>
+</svg>
