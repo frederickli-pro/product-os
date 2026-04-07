@@ -144,11 +144,6 @@ export function EngineQuadrant({
           <p className="text-sm text-muted-foreground line-clamp-2">
             {engine.description}
           </p>
-          {engine.previewContent && (
-            <p className="text-xs text-muted-foreground italic">
-              {engine.previewContent}
-            </p>
-          )}
           <div className="flex items-center justify-between pt-2">
             {isCompleted ? (
               <span className="flex items-center gap-1 text-sm text-green-600">

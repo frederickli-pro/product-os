@@ -25,3 +25,9 @@ export interface WelcomeOverlayProps {
   onClose: () => void
   onStartDemo: () => void
 }
+
+export interface WelcomeOverlayProps {
+  isOpen: boolean
+  onClose: () => void
+  onStartDemo: () => void
+}
