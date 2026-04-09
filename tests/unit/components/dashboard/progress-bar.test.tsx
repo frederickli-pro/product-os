@@ -75,4 +75,32 @@ describe('ProgressBar', () => {
 
     expect(screen.getByText('Demo Progress')).toBeInTheDocument();
   });
+
+  it('constrains progress bar within its container to prevent horizontal overflow', () => {
+    // Business behavior: The progress bar should never cause a horizontal scrollbar
+    // on the landing page. The outer wrapper must clip any overflowing content.
+    render(<ProgressBar {...defaultProps} />);
+
+    const progressBar = screen.getByTestId('progress-bar');
+    expect(progressBar).toHaveClass('overflow-hidden');
+  });
+
+  it('positions act markers using flex layout without conflicting inline left styles', () => {
+    // Business behavior: Act markers (1-4) must be evenly spaced within the track
+    // without extending beyond the container edges. Using flex justify-between alone
+    // ensures markers stay within bounds; inline `left` positioning conflicts with
+    // flex and causes overflow.
+    render(<ProgressBar {...defaultProps} />);
+
+    // Each marker number or check icon should be visible
+    const markers = screen.getAllByText(/^[1-4]$/);
+    expect(markers).toHaveLength(4);
+
+    // Markers should NOT have inline `left` style (which conflicts with flex layout)
+    markers.forEach((marker) => {
+      const markerContainer = marker.closest('[data-testid^="act-marker-"]');
+      expect(markerContainer).toBeTruthy();
+      expect(markerContainer?.getAttribute('style')).toBeNull();
+    });
+  });
 });

@@ -33,7 +33,7 @@ export function ProgressBar({ completedActs, currentAct }: ProgressBarProps) {
 
   return (
     <div
-      className="w-full py-4"
+      className="w-full py-4 overflow-hidden"
       data-testid="progress-bar"
       role="progressbar"
       aria-valuenow={progressPercentage}
@@ -59,18 +59,17 @@ export function ProgressBar({ completedActs, currentAct }: ProgressBarProps) {
           />
         </div>
 
-        {/* Act markers */}
+        {/* Act markers — pure flex positioning, no inline left/margin overrides */}
         <div className="absolute top-0 left-0 right-0 flex justify-between">
-          {acts.map((act, index) => {
+          {acts.map((act) => {
             const isCompleted = completedActs.includes(act);
             const isCurrent = currentAct === act;
-            const position = (index / 3) * 100;
 
             return (
               <div
                 key={act}
-                className="relative"
-                style={{ left: `${position}%`, marginLeft: index === 0 ? 0 : index === 3 ? '-24px' : '-12px' }}
+                className="flex flex-col items-center"
+                data-testid={`act-marker-${act}`}
               >
                 <motion.div
                   initial={{ scale: 0.8 }}
@@ -90,7 +89,7 @@ export function ProgressBar({ completedActs, currentAct }: ProgressBarProps) {
                     act
                   )}
                 </motion.div>
-                <span className="absolute top-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground whitespace-nowrap">
+                <span className="mt-2 text-xs text-muted-foreground whitespace-nowrap">
                   {actLabels[act]}
                 </span>
               </div>
