@@ -101,7 +101,7 @@ export default function DashboardHub() {
                 <Layers className="h-5 w-5" />
               </div>
               <div>
-                <h1 className="text-lg font-bold">Product Operating System</h1>
+                <h1 className="text-lg font-bold">Product AI Operating System</h1>
                 <p className="text-xs text-muted-foreground">Portfolio AI Accountability Playbook</p>
               </div>
             </div>

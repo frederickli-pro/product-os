@@ -37,7 +37,7 @@ export function MetricsTable({ metrics }: MetricsTableProps) {
           Time Reduction Metrics
         </CardTitle>
         <p className="text-sm text-muted-foreground">
-          Side-by-side comparison: Manual Process vs. Product Operating System
+          Side-by-side comparison: Manual Process vs. Product AI Operating System
         </p>
       </CardHeader>
 
@@ -151,7 +151,7 @@ export function MetricsTable({ metrics }: MetricsTableProps) {
               </p>
               <p className="text-sm text-gray-600">
                 These improvements directly translate to faster time-to-market, reduced operational overhead,
-                and higher confidence in shipping the right features. The Product Operating System doesn&apos;t just
+                and higher confidence in shipping the right features. The Product AI Operating System doesn&apos;t just
                 make you faster — it makes your entire product development process more predictable and accountable.
               </p>
             </div>

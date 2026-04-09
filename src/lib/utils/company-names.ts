@@ -159,7 +159,7 @@ export const companyContextMessages = {
    * Get the demo introduction message.
    */
   getDemoIntroduction(): string {
-    return `Welcome to ${getPEFirmPossessive()} Product Operating System Demo`
+    return `Welcome to ${getPEFirmPossessive()} Product AI Operating System Demo`
   },
 
   /**
