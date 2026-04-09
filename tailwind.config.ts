@@ -12,6 +12,12 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Vista shorthand aliases (used across 80+ component references)
+        'vista-primary': '#1E3A5F',
+        'vista-secondary': '#2E5A8F',
+        'vista-accent': '#4A90C2',
+        'vista-light': '#E8F0F8',
+        'vista-dark': '#0D1F33',
         // Vista Primary Blues - Deep, Professional Navy Spectrum
         'vista-navy': {
           DEFAULT: '#0D2847',
