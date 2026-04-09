@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { DemoProvider } from '@/context/demo-context'
+import { AnalyticsProvider } from '@/components/analytics/analytics-provider'
 
 export const metadata: Metadata = {
   title: 'Product Operating System',
@@ -30,9 +31,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body className="font-sans antialiased min-h-screen bg-gray-50">
-        <DemoProvider>
-          {children}
-        </DemoProvider>
+        <AnalyticsProvider>
+          <DemoProvider>
+            {children}
+          </DemoProvider>
+        </AnalyticsProvider>
       </body>
     </html>
   )
