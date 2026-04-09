@@ -66,7 +66,7 @@ export function EvidenceExplorer({
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as EvidenceTab)}>
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 h-auto">
             <TabsTrigger value="interviews" data-testid="tab-interviews">Interviews</TabsTrigger>
             <TabsTrigger value="nps" data-testid="tab-nps">NPS</TabsTrigger>
             <TabsTrigger value="support" data-testid="tab-support">Support Tickets</TabsTrigger>
