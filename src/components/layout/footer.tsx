@@ -36,7 +36,7 @@ export function Footer({ className }: FooterProps) {
               />
             </Link>
             <p className="text-vista-slate text-sm leading-relaxed max-w-md">
-              Product Operating System powered by {peFirmName}.
+              Product AI Operating System powered by {peFirmName}.
               Transforming portfolio company product operations through
               systematic, sustainable accountability mechanisms.
             </p>
@@ -111,7 +111,7 @@ export function Footer({ className }: FooterProps) {
             </p>
             <div className="flex items-center gap-6">
               <span className="text-vista-slate text-xs">
-                Product Operating System Demo
+                Product AI Operating System Demo
               </span>
               <span className="text-vista-teal text-xs font-medium">
                 v1.0

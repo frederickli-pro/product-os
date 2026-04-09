@@ -446,7 +446,7 @@ export const demoTourSteps: TourStep[] = [
   {
     id: 'welcome',
     targetSelector: '[data-testid="engine-grid"]',
-    title: 'Welcome to the Product Operating System',
+    title: 'Welcome to the Product AI Operating System',
     content:
       'This demo showcases a four-engine system that transforms how portfolio companies operate. Let\'s explore each engine.',
     position: 'center',

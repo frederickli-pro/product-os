@@ -27,25 +27,25 @@ const actDescriptions = [
   {
     act: 1,
     title: 'Act 1: Diagnostic',
-    description: 'Understand where we actually are through evidence-based maturity assessment',
+    description: 'Understand where the portfolio company actually is through an evidence-based AI maturity assessment',
     stage: 'Discovery',
   },
   {
     act: 2,
     title: 'Act 2: Prioritization',
-    description: 'See how priorities emerge with transparent reasoning and trade-off analysis',
+    description: 'See how AI initiatives emerge with transparent reasoning and trade-off analysis',
     stage: 'Design',
   },
   {
     act: 3,
     title: 'Act 3: Execution',
-    description: 'Watch decisions transform into shipped product artifacts',
+    description: 'Watch AI integration decisions transform into shipped product artifacts',
     stage: 'Develop',
   },
   {
     act: 4,
     title: 'Act 4: Governance',
-    description: 'Scale accountability across the portfolio with compounding intelligence',
+    description: 'Scale AI adoption accountability across the PE portfolio with compounding intelligence',
     stage: 'Deploy',
   },
 ];
@@ -62,11 +62,11 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
             <DialogHeader>
               <DialogTitle className="text-2xl flex items-center gap-2">
                 <Compass className="h-6 w-6 text-vista-blue" />
-                Welcome to the Product Operating System
+                Welcome to the Product AI Operating System
               </DialogTitle>
               <DialogDescription className="text-base">
-                Experience the four-act demo that shows how to turn strategic mandates
-                into systematic execution.
+                Experience the four-act demo that shows how to turn strategic AI mandates
+                into systematic execution across portfolio companies.
               </DialogDescription>
             </DialogHeader>
 
@@ -103,8 +103,8 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
 
               <div className="border-t pt-4 mt-4">
                 <p className="text-sm text-muted-foreground">
-                  <strong>One platform.</strong> Empowered teams. Shared context.
-                  Complete lifecycle. From customer insight to customer outcomes, much faster.
+                  <strong>One platform.</strong> Empowered portfolio companies. Shared context for PE firms.
+                  Complete lifecycle. From AI mandate to integrated AI outcomes, much faster.
                 </p>
               </div>
             </div>

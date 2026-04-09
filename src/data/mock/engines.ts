@@ -1,5 +1,5 @@
 /**
- * Mock data for the four engines in the Product Operating System.
+ * Mock data for the four engines in the Product AI Operating System.
  */
 
 import { Engine } from '@/types';

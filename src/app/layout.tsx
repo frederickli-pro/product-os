@@ -4,8 +4,8 @@ import { DemoProvider } from '@/context/demo-context'
 import { AnalyticsProvider } from '@/components/analytics/analytics-provider'
 
 export const metadata: Metadata = {
-  title: 'Product Operating System',
-  description: 'Portfolio AI Accountability Playbook - Product Operating System Demo',
+  title: 'Product AI Operating System',
+  description: 'Portfolio AI Accountability Playbook - Product AI Operating System Demo',
   robots: 'index, follow',
   metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN ? `https://${process.env.NEXT_PUBLIC_DOMAIN}` : 'http://localhost:3000'),
 }
