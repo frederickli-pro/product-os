@@ -524,6 +524,6 @@ export const timeReductionMetrics: TimeReductionMetric[] = [
 ]
 
 export const calloutMessages = {
-  frameworksStop: "This is where most frameworks stop. This is where execution usually breaks. Yansu doesn't.",
+  frameworksStop: "This is where many frameworks stop and execution breaks. AI-led platforms like Yansu unlock teams.",
   unifiedPlatform: "No handoffs. No lost context. No 'wait, why did we decide this?'"
 }

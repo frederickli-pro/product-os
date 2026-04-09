@@ -249,7 +249,7 @@ export default function Engine3Page() {
           </motion.div>
         </div>
 
-        {/* Callout Message - "Most frameworks stop" */}
+        {/* Callout Message - "Many frameworks stop" */}
         {(showPRD || showEpic) && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
