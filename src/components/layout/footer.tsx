@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { BrandLogo } from './brand-logo';
+import { getPEFirmName } from '@/lib/utils/env-config';
 
 interface FooterProps {
   className?: string;
@@ -11,6 +12,7 @@ interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const peFirmName = getPEFirmName();
 
   return (
     <footer
@@ -26,18 +28,15 @@ export function Footer({ className }: FooterProps) {
           {/* Logo and Description */}
           <div className="md:col-span-2">
             <Link href="/" className="inline-block mb-4">
-              <Image
-                src="/images/vista-logo.svg"
-                alt="Vista Equity Partners"
-                width={160}
+              <BrandLogo
+                inverted
+                width={180}
                 height={44}
-                className="brightness-0 invert"
                 data-testid="footer-vista-logo"
-                priority
               />
             </Link>
             <p className="text-vista-slate text-sm leading-relaxed max-w-md">
-              Product Operating System powered by Vista Equity Partners.
+              Product Operating System powered by {peFirmName}.
               Transforming portfolio company product operations through
               systematic, sustainable accountability mechanisms.
             </p>
@@ -108,7 +107,7 @@ export function Footer({ className }: FooterProps) {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-vista-slate text-xs">
-              &copy; {currentYear} Vista Equity Partners. All rights reserved.
+              &copy; {currentYear} {peFirmName}. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <span className="text-vista-slate text-xs">

@@ -5,7 +5,7 @@ import { AnalyticsProvider } from '@/components/analytics/analytics-provider'
 
 export const metadata: Metadata = {
   title: 'Product Operating System',
-  description: 'Portfolio AI Accountability Playbook - Vista Product Operating System Demo',
+  description: 'Portfolio AI Accountability Playbook - Product Operating System Demo',
   robots: 'index, follow',
   metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN ? `https://${process.env.NEXT_PUBLIC_DOMAIN}` : 'http://localhost:3000'),
 }

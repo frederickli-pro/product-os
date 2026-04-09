@@ -1,28 +1,14 @@
 /**
- * Unit tests for Vista logo placement in header.
- * Test case 2: Check Vista logo in header - Vista logo displayed in top-left position
+ * Unit tests for brand logo placement in header.
+ * Test case 2: Check brand logo in header - logo displayed in top-left position
+ *
+ * Business behavior: The header displays the PE firm name (from NEXT_PUBLIC_PE_FIRM_NAME)
+ * with "Value Creation" subtext, positioned in the top-left as the primary brand element.
  */
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Header } from '@/components/layout/header';
-
-// Mock next/image
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { 'data-testid'?: string }) => {
-    const { src, alt, width, height, priority, ...rest } = props;
-    return (
-      <img
-        src={src as string}
-        alt={alt}
-        width={width}
-        height={height}
-        {...rest}
-      />
-    );
-  },
-}));
 
 // Mock next/link
 jest.mock('next/link', () => ({
@@ -32,15 +18,32 @@ jest.mock('next/link', () => ({
   ),
 }));
 
-describe('Header Vista Logo Placement', () => {
-  it('renders Vista logo in header', () => {
+// Mock env-config to provide a known PE firm name for testing
+// Simulates a deployment where the PE firm name is configured via env variable
+jest.mock('@/lib/utils/env-config', () => ({
+  getPEFirmName: () => '[PE Firm]',
+  getPortfolioCoName: () => '[Portfolio Co]',
+  getProductName: () => '[Software]',
+  getDeveloperName: () => 'developer',
+  getCEOName: () => '[CEO Name]',
+  ENV_DEFAULTS: {
+    PE_FIRM_NAME: '[PE Firm]',
+    PORTFOLIO_CO_NAME: '[Portfolio Co]',
+    PRODUCT_NAME: '[Software]',
+    DEVELOPER_NAME: 'developer',
+    CEO_NAME: '[CEO Name]',
+  },
+}));
+
+describe('Header Brand Logo Placement', () => {
+  it('renders brand logo in header', () => {
     render(<Header />);
 
     const logo = screen.getByTestId('header-vista-logo');
     expect(logo).toBeInTheDocument();
   });
 
-  it('displays Vista logo as first element (top-left position)', () => {
+  it('displays brand logo as first element (top-left position)', () => {
     render(<Header />);
 
     const header = screen.getByTestId('vista-header');
@@ -55,26 +58,17 @@ describe('Header Vista Logo Placement', () => {
     expect(logoLink).toHaveAttribute('href', '/');
   });
 
-  it('Vista logo has correct alt text', () => {
+  it('brand logo displays the PE firm name from env config', () => {
     render(<Header />);
 
-    const logo = screen.getByTestId('header-vista-logo');
-    expect(logo).toHaveAttribute('alt', 'Vista Equity Partners');
+    // The BrandLogo component should render the PE firm name as text
+    expect(screen.getByText('[PE Firm]')).toBeInTheDocument();
   });
 
-  it('Vista logo has correct source path', () => {
+  it('brand logo displays "Value Creation" subtext', () => {
     render(<Header />);
 
-    const logo = screen.getByTestId('header-vista-logo');
-    expect(logo).toHaveAttribute('src', '/images/vista-logo.svg');
-  });
-
-  it('Vista logo has appropriate dimensions for header', () => {
-    render(<Header />);
-
-    const logo = screen.getByTestId('header-vista-logo');
-    expect(logo).toHaveAttribute('width', '140');
-    expect(logo).toHaveAttribute('height', '38');
+    expect(screen.getByText('Value Creation')).toBeInTheDocument();
   });
 
   it('header has sticky positioning for persistent branding', () => {
@@ -86,7 +80,7 @@ describe('Header Vista Logo Placement', () => {
     expect(header).toHaveClass('z-50');
   });
 
-  it('header has Vista brand styling', () => {
+  it('header has brand styling', () => {
     render(<Header />);
 
     const header = screen.getByTestId('vista-header');

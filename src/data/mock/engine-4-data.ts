@@ -330,7 +330,7 @@ export const portfolioIntelligence: PortfolioIntelligence = {
 }
 
 // Anchor messages for Engine 4
-export const anchorMessage = "Every PE firm has playbooks. Vista can have a system that executes those playbooks — and gets smarter every time it runs."
+export const anchorMessage = "Every PE firm has playbooks. Yours can have a system that executes those playbooks — and gets smarter every time it runs."
 
 export const unifiedPlatformMessage = "One platform. 90+ portfolio companies. Compounding intelligence with every engagement."
 

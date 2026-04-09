@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { BrandLogo } from './brand-logo';
 
 interface HeaderProps {
   className?: string;
@@ -20,14 +20,10 @@ export function Header({ className }: HeaderProps) {
     >
       <div className="container mx-auto px-6 h-18 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image
-            src="/images/vista-logo.svg"
-            alt="Vista Equity Partners"
-            width={140}
+          <BrandLogo
+            width={160}
             height={38}
-            className="transition-transform duration-200 group-hover:scale-[1.02]"
             data-testid="header-vista-logo"
-            priority
           />
         </Link>
         <nav className="flex items-center gap-1">
