@@ -23,6 +23,7 @@ import { SDLCStepper } from '@/components/dashboard/sdlc-stepper';
 import { useDemoContext } from '@/context/demo-context';
 import { engines } from '@/data/mock/engines';
 import { EngineId, SDLCStage } from '@/types';
+import { getPEFirmName } from '@/lib/utils/env-config';
 
 const STORAGE_KEY = 'demo_first_visit';
 
@@ -106,7 +107,7 @@ export default function DashboardHub() {
             </div>
             <div className="hidden md:block text-right">
               <p className="text-sm text-muted-foreground">Powered by</p>
-              <p className="text-sm font-semibold">[PE Firm] Value Creation</p>
+              <p className="text-sm font-semibold">{getPEFirmName()} Value Creation</p>
             </div>
           </div>
         </div>
@@ -176,7 +177,7 @@ export default function DashboardHub() {
             </span>
           </div>
           <p className="text-lg font-medium max-w-3xl mx-auto">
-            &ldquo;Every PE firm has playbooks. [PE Firm] can have a system that executes
+            &ldquo;Every PE firm has playbooks. Yours can have a system that executes
             those playbooks — and gets smarter every time it runs.&rdquo;
           </p>
           <p className="text-sm text-muted-foreground mt-2">

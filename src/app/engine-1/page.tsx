@@ -4,6 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { Header } from '@/components/layout/header'
 import { SDLCStepper } from '@/components/dashboard/sdlc-stepper'
 import { EvidenceExplorer } from '@/components/engine-1/evidence-explorer'
 import { MaturityAssessment } from '@/components/engine-1/maturity-assessment'
@@ -25,22 +26,25 @@ import {
 
 export default function Engine1Page() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-vista-light" data-testid="engine-1-page">
-      <header className="vista-gradient text-white py-6">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center gap-4 mb-4">
-            <Link href="/">
-              <Button variant="ghost" className="text-white hover:bg-white/20 p-2">
-                <ArrowLeft className="w-5 h-5" />
-              </Button>
-            </Link>
-            <div>
-              <h1 className="text-2xl font-bold">Engine 1: Diagnostic</h1>
-              <p className="text-vista-light">Act 1 - &ldquo;Where we actually are&rdquo;</p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-vista-light" data-testid="engine-1-page">
+      <Header />
+
+      <main>
+        <div className="vista-gradient text-white py-6">
+          <div className="container mx-auto px-6">
+            <div className="flex items-center gap-4 mb-4">
+              <Link href="/">
+                <Button variant="ghost" className="text-white hover:bg-white/20 p-2">
+                  <ArrowLeft className="w-5 h-5" />
+                </Button>
+              </Link>
+              <div>
+                <h1 className="text-2xl font-bold">Engine 1: Diagnostic</h1>
+                <p className="text-vista-light">Act 1 - &ldquo;Where we actually are&rdquo;</p>
+              </div>
             </div>
           </div>
         </div>
-      </header>
 
       <div className="container mx-auto px-6 py-6">
         <motion.div
@@ -107,7 +111,8 @@ export default function Engine1Page() {
           nextHref="/engine-2"
           nextLabel="Continue to Engine 2"
         />
-      </div>
-    </main>
+        </div>
+      </main>
+    </div>
   )
 }
