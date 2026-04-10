@@ -212,8 +212,8 @@ describe('Hardcoded Company Names Verification', () => {
       const files = getSourceFiles(srcDir)
       const violations: { file: string; matches: string[]; lines: number[] }[] = []
 
-      // Mock data files are allowed to contain Portside for scenario context
-      const mockDataPattern = /data\/mock\//
+      // Mock data and seed files are allowed to contain Portside for scenario context
+      const mockDataPattern = /data\/(mock|seed)\//
 
       for (const file of files) {
         if (isAllowedContext(file)) {

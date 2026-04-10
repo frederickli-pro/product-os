@@ -9,8 +9,10 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^bson$': '<rootDir>/node_modules/bson/lib/bson.cjs',
   },
   testPathIgnorePatterns: ['<rootDir>/tests/e2e/'],
+  transformIgnorePatterns: ['/node_modules/(?!(bson)/)'],
   maxWorkers: 1,
 }
 

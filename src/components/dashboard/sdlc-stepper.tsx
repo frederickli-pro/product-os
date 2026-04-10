@@ -23,7 +23,7 @@ export function SDLCStepper({ currentStage, completedStages, contextMessage, con
   // Support both contextMessage and contextBadge props
   const displayMessage = contextMessage || contextBadge
   return (
-    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-4">
+    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-4" data-testid="sdlc-stepper">
       <div className="flex items-center justify-between">
         {stages.map((stage, index) => {
           const isCompleted = completedStages.includes(stage.id)
@@ -32,7 +32,12 @@ export function SDLCStepper({ currentStage, completedStages, contextMessage, con
 
           return (
             <React.Fragment key={stage.id}>
-              <div className="flex flex-col items-center">
+              <div
+                className="flex flex-col items-center"
+                data-testid={`stage-${stage.id}`}
+                data-active={isActive ? 'true' : 'false'}
+                data-completed={isCompleted ? 'true' : 'false'}
+              >
                 <motion.div
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
@@ -46,7 +51,7 @@ export function SDLCStepper({ currentStage, completedStages, contextMessage, con
                   )}
                 >
                   {isCompleted ? (
-                    <Check className="w-5 h-5" />
+                    <Check className="w-5 h-5" data-testid={`checkmark-${stage.id}`} />
                   ) : (
                     index + 1
                   )}
@@ -78,8 +83,11 @@ export function SDLCStepper({ currentStage, completedStages, contextMessage, con
         })}
       </div>
       {displayMessage && (
-        <div className="mt-4 text-center">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-vista-light text-vista-primary">
+        <div className="mt-4 text-center" data-testid="context-badge">
+          <span
+            className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-vista-light text-vista-primary"
+            data-testid="context-message"
+          >
             {displayMessage}
           </span>
         </div>

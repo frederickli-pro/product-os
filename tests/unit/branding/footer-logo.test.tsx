@@ -91,7 +91,7 @@ describe('Footer Brand Logo Placement', () => {
     render(<Footer />);
 
     // The description should use the env-configured PE firm name, not hardcoded "Vista"
-    expect(screen.getByText(/Product Operating System powered by \[PE Firm\]/)).toBeInTheDocument();
+    expect(screen.getByText(/Product AI Operating System powered by \[PE Firm\]/)).toBeInTheDocument();
   });
 
   it('footer contains engine navigation links', () => {
