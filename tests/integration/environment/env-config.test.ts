@@ -418,7 +418,7 @@ describe('Environment Configuration', () => {
 
       // Note: "Investment Partners" ends with 's', so possessive is "Partners'" not "Partners's"
       expect(companyContextMessages.getDemoIntroduction()).toBe(
-        "Welcome to Investment Partners' Product Operating System Demo"
+        "Welcome to Investment Partners' Product AI Operating System Demo"
       )
       expect(companyContextMessages.getScenarioDescription()).toContain('Investment Partners')
       expect(companyContextMessages.getScenarioDescription()).toContain('StartupCo')

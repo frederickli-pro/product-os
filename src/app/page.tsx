@@ -12,7 +12,7 @@
  * - Jump to engine navigation
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Layers, Sparkles } from 'lucide-react';
@@ -25,8 +25,6 @@ import { engines } from '@/data/mock/engines';
 import { EngineId, SDLCStage } from '@/types';
 import { getPEFirmName } from '@/lib/utils/env-config';
 
-const STORAGE_KEY = 'demo_first_visit';
-
 export default function DashboardHub() {
   const router = useRouter();
   const {
@@ -37,19 +35,8 @@ export default function DashboardHub() {
     isEngineCompleted,
   } = useDemoContext();
 
-  const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-
-  useEffect(() => {
-    // Check if this is first visit
-    const visited = localStorage.getItem(STORAGE_KEY);
-    if (!visited) {
-      setShowWelcome(true);
-      setIsFirstVisit(true);
-    } else {
-      setIsFirstVisit(false);
-    }
-  }, []);
 
   const handleEngineClick = (engineId: EngineId) => {
     setCurrentEngine(engineId);
@@ -58,13 +45,11 @@ export default function DashboardHub() {
 
   const handleCloseWelcome = () => {
     setShowWelcome(false);
-    localStorage.setItem(STORAGE_KEY, 'true');
     setIsFirstVisit(false);
   };
 
   const handleStartDemo = () => {
     setShowWelcome(false);
-    localStorage.setItem(STORAGE_KEY, 'true');
     setIsFirstVisit(false);
     handleEngineClick(1);
   };

@@ -24,7 +24,7 @@ describe('CalloutMessage', () => {
 
     expect(screen.getByTestId('callout-message')).toBeInTheDocument();
     expect(screen.getByTestId('callout-message-text')).toHaveTextContent(
-      "This is where most frameworks stop. This is where execution usually breaks. Yansu doesn't."
+      "This is where many frameworks stop and execution breaks. AI-led platforms like Yansu unlock teams."
     );
   });
 

@@ -11,7 +11,8 @@
  */
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Play, Compass } from 'lucide-react';
+import { ArrowRight, Play, Compass, TrendingUp, Clock, Shield } from 'lucide-react';
+import { getPortfolioCoName } from '@/lib/utils/env-config';
 import {
   Dialog,
   DialogContent,
@@ -51,6 +52,8 @@ const actDescriptions = [
 ];
 
 export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayProps) {
+  const portfolioCo = getPortfolioCoName();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -70,7 +73,31 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
               </DialogDescription>
             </DialogHeader>
 
-            <div className="space-y-4 py-4">
+            {/* Scenario Context */}
+            <div className="rounded-lg border bg-secondary/40 p-4 space-y-3">
+              <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                The Scenario
+              </p>
+              <p className="text-sm font-medium">
+                Your PE firm just acquired <span className="text-vista-blue font-semibold">{portfolioCo}</span> — a B2B software company with strong fundamentals and clear upside potential.
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex items-start gap-2 text-sm">
+                  <Clock className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                  <span><strong>90-day mandate:</strong> identify and execute the top value-driving AI initiatives before the window closes.</span>
+                </div>
+                <div className="flex items-start gap-2 text-sm">
+                  <TrendingUp className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <span><strong>Growth objective:</strong> accelerate revenue and product velocity through systematic AI adoption.</span>
+                </div>
+                <div className="flex items-start gap-2 text-sm">
+                  <Shield className="h-4 w-4 text-vista-blue mt-0.5 flex-shrink-0" />
+                  <span><strong>Risk objective:</strong> reduce execution and governance risk while scaling AI across the portfolio.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
               <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
                 The Four-Act Journey
               </h4>

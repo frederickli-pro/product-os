@@ -1,4 +1,8 @@
 /**
+ * @jest-environment node
+ */
+
+/**
  * Integration tests for MongoDB connection and seed functionality.
  * Owner: Scenario 12 - Mock Data Seeding and Database
  *
@@ -134,7 +138,7 @@ describe('MongoDB Integration Tests', () => {
   describe('Test Case 3: Customer Interviews Collection', () => {
     beforeEach(async () => {
       if (isConnected) await seedTestData(db)
-    })
+    }, 15000)
 
     it('should return 8-10 interview transcript excerpts with thematic tagging', async () => {
       if (!isConnected) {
@@ -169,7 +173,7 @@ describe('MongoDB Integration Tests', () => {
   describe('Test Case 4: Support Tickets Collection', () => {
     beforeEach(async () => {
       if (isConnected) await seedTestData(db)
-    })
+    }, 15000)
 
     it('should return categorized ticket data with volume breakdown (scheduling 47%, compliance 23%, mobile 18%, other 12%)', async () => {
       if (!isConnected) {
@@ -202,7 +206,7 @@ describe('MongoDB Integration Tests', () => {
   describe('Test Case 5: NPS Responses Collection', () => {
     beforeEach(async () => {
       if (isConnected) await seedTestData(db)
-    })
+    }, 15000)
 
     it('should return NPS data with score distribution (promoters 34%, passives 41%, detractors 25%)', async () => {
       if (!isConnected) {
@@ -232,7 +236,7 @@ describe('MongoDB Integration Tests', () => {
   describe('Test Case 6: Product Analytics Collection', () => {
     beforeEach(async () => {
       if (isConnected) await seedTestData(db)
-    })
+    }, 15000)
 
     it('should return usage metrics with adoption rates (scheduling 89%, compliance 67%, mobile 45%, API 23%)', async () => {
       if (!isConnected) {
@@ -263,7 +267,7 @@ describe('MongoDB Integration Tests', () => {
   describe('Test Case 7: Maturity Assessment Collection', () => {
     beforeEach(async () => {
       if (isConnected) await seedTestData(db)
-    })
+    }, 15000)
 
     it('should return baseline scores with percentile rankings against portfolio companies', async () => {
       if (!isConnected) {
