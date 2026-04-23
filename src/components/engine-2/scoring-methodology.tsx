@@ -137,6 +137,26 @@ export function ScoringMethodology({
             </ul>
           </motion.div>
         )}
+
+        {selectedInitiative && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200"
+            data-testid="confidence-footnote"
+          >
+            <div className="flex items-start gap-1.5">
+              <Info className="w-3.5 h-3.5 text-muted-foreground mt-0.5 flex-shrink-0" />
+              <div>
+                <span className="text-xs font-semibold text-gray-600">How confidence is calculated¹ </span>
+                <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">
+                  {selectedInitiative.confidenceFootnote}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </CardContent>
     </Card>
   );
