@@ -20,7 +20,7 @@ describe('InitiativesList', () => {
     mockOnSelectInitiative.mockClear();
   });
 
-  it('renders all initiatives with shortNames', () => {
+  it('renders all initiatives', () => {
     render(
       <InitiativesList
         initiatives={initiatives}
@@ -30,10 +30,10 @@ describe('InitiativesList', () => {
     );
 
     expect(screen.getByTestId('initiatives-list')).toBeInTheDocument();
-    // Check by shortName (displayed as tags in UI) - matches scenario test case 3
-    expect(screen.getByText('scheduling-compliance unification')).toBeInTheDocument();
-    expect(screen.getByText('AI copilot features')).toBeInTheDocument();
-    expect(screen.getByText('mobile experience overhaul')).toBeInTheDocument();
+    // Check by initiative name (displayed in cards)
+    expect(screen.getByText('Unified Scheduling-Compliance Platform')).toBeInTheDocument();
+    expect(screen.getByText('AI Copilot Capabilities')).toBeInTheDocument();
+    expect(screen.getByText('Mobile Experience Overhaul')).toBeInTheDocument();
   });
 
   it('displays Unified Scheduling-Compliance Platform as top priority', () => {
