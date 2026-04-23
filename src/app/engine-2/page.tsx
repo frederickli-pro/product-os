@@ -7,6 +7,7 @@ import { SDLCStepper } from '@/components/dashboard/sdlc-stepper';
 import { InitiativesList } from '@/components/engine-2/initiatives-list';
 import { ScoringMethodology } from '@/components/engine-2/scoring-methodology';
 import { TradeOffAnalysis } from '@/components/engine-2/trade-off-analysis';
+import { FeasibilityImpactMatrix } from '@/components/engine-2/feasibility-impact-matrix';
 import { StakeholderInput } from '@/components/engine-2/stakeholder-input';
 import { ConfidenceIndicators } from '@/components/engine-2/confidence-indicators';
 import { TransitionPrompt } from '@/components/shared/transition-prompt';
@@ -84,8 +85,13 @@ export default function Engine2Page() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="col-span-4"
+            className="col-span-4 space-y-4"
           >
+            <FeasibilityImpactMatrix
+              initiatives={initiatives}
+              selectedInitiative={selectedInitiative}
+              onSelectInitiative={setSelectedInitiative}
+            />
             <TradeOffAnalysis
               initiatives={initiatives}
               selectedInitiative={selectedInitiative}

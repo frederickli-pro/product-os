@@ -4,8 +4,29 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { cn, formatPercentage } from '@/lib/utils';
-import { Initiative } from '@/data/mock/initiatives';
+import { AutomationType, Initiative } from '@/data/mock/initiatives';
+
+const AUTOMATION_STYLES: Record<AutomationType, { badge: string; dot: string }> = {
+  'Full Automation': {
+    badge: 'bg-emerald-100 text-emerald-700 border border-emerald-200',
+    dot: 'bg-emerald-500',
+  },
+  'Co-pilot / Augmented': {
+    badge: 'bg-amber-100 text-amber-700 border border-amber-200',
+    dot: 'bg-amber-500',
+  },
+  'Human-Led + AI': {
+    badge: 'bg-purple-100 text-purple-700 border border-purple-200',
+    dot: 'bg-purple-500',
+  },
+};
 
 interface InitiativesListProps {
   initiatives: Initiative[];
@@ -69,12 +90,38 @@ export function InitiativesList({
                   <p className="text-xs text-muted-foreground line-clamp-2 ml-8">
                     {initiative.description}
                   </p>
-                  <span
-                    className="inline-block ml-8 mt-1 text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600"
-                    data-testid={`initiative-shortname-${initiative.id}`}
-                  >
-                    {initiative.shortName}
-                  </span>
+                  <div className="ml-8 mt-1.5 flex items-center gap-1.5 flex-wrap">
+                    <span
+                      className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600"
+                      data-testid={`initiative-shortname-${initiative.id}`}
+                    >
+                      {initiative.shortName}
+                    </span>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span
+                            className={cn(
+                              'text-xs px-2 py-0.5 rounded font-medium cursor-help flex items-center gap-1',
+                              AUTOMATION_STYLES[initiative.automationType].badge
+                            )}
+                            data-testid={`automation-badge-${initiative.id}`}
+                          >
+                            <span
+                              className={cn(
+                                'inline-block w-1.5 h-1.5 rounded-full',
+                                AUTOMATION_STYLES[initiative.automationType].dot
+                              )}
+                            />
+                            {initiative.automationType}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom" className="max-w-xs">
+                          <p className="text-xs">{initiative.automationFootnote}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 ml-2">
                   <div className="text-right">

@@ -11,7 +11,7 @@
  */
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Play, Compass, TrendingUp, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Play, Compass, TrendingUp, Clock, Shield, CheckCircle2, Database, HelpCircle, AlertTriangle } from 'lucide-react';
 import { getPortfolioCoName } from '@/lib/utils/env-config';
 import {
   Dialog,
@@ -51,6 +51,14 @@ const actDescriptions = [
   },
 ];
 
+const integrations = [
+  { label: 'CRM', detail: 'Salesforce — 2,400 accounts, 18 months of deal history', status: 'connected' },
+  { label: 'Support Tickets', detail: 'Zendesk — 14,200 tickets across 8 categories', status: 'connected' },
+  { label: 'Product Backlog', detail: 'Jira — 340 open issues, 12 active sprints', status: 'connected' },
+  { label: 'Customer Feedback', detail: 'NPS surveys + in-app reviews — 1,800 responses', status: 'connected' },
+  { label: 'Product Analytics', detail: 'Mixpanel — feature usage, funnels, retention cohorts', status: 'connected' },
+];
+
 export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayProps) {
   const portfolioCo = getPortfolioCoName();
 
@@ -59,7 +67,7 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
       {isOpen && (
         <Dialog open={isOpen} onOpenChange={onClose}>
           <DialogContent
-            className="sm:max-w-[600px] max-h-[90vh] flex flex-col p-0 gap-0"
+            className="sm:max-w-[620px] max-h-[90vh] flex flex-col p-0 gap-0"
             data-testid="welcome-overlay"
           >
             {/* Fixed header */}
@@ -77,19 +85,78 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
             </div>
 
             {/* Scrollable body */}
-            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-              {/* Scenario Context */}
-              <div className="rounded-lg border bg-secondary/40 p-4 space-y-3">
-                <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  The Scenario
+            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-5">
+
+              {/* PE Operating Partner Framing */}
+              <div className="rounded-lg border border-vista-blue/20 bg-vista-blue/5 p-4 space-y-2">
+                <p className="text-sm font-semibold uppercase tracking-wide text-vista-blue">
+                  Your Role
                 </p>
-                <p className="text-sm font-medium">
-                  Your PE firm just acquired <span className="text-vista-blue font-semibold">{portfolioCo}</span> — a B2B software company with strong fundamentals and clear upside potential.
+                <p className="text-sm font-medium leading-relaxed">
+                  You are a PE operating partner. Your firm just acquired{' '}
+                  <span className="text-vista-blue font-semibold">{portfolioCo}</span> — a B2B SaaS company with strong fundamentals and clear upside.{' '}
+                  <strong>You have 90 days to identify and execute the top value-driving initiatives to increase growth while reducing risk.</strong>
+                </p>
+              </div>
+
+              {/* The Challenge */}
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <HelpCircle className="h-4 w-4 text-amber-600 flex-shrink-0" />
+                  <p className="text-sm font-semibold text-amber-800">The Challenge</p>
+                </div>
+                <p className="text-sm text-amber-800 leading-relaxed">
+                  The old approach: sit in a room with leadership and ask{' '}
+                  <em>"what are the top three things you want to solve?"</em> — but they would have solved those already if they knew.
+                  Leadership can't see the forest through the trees.
+                </p>
+                <div className="flex items-start gap-2 text-sm text-amber-700 pt-1">
+                  <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span>
+                    Without a systematic diagnostic, teams often commit to the wrong priority — spending months on what turns out to be 5% of the actual problem.
+                  </span>
+                </div>
+              </div>
+
+              {/* Integrations Connected */}
+              <div className="rounded-lg border bg-secondary/40 p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                    Integrations Connected
+                  </p>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">
+                    Setup complete · 2 weeks ago
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Upon acquisition, we hooked into {portfolioCo}&apos;s key systems of record. The data below powers everything you&apos;re about to see.
+                </p>
+                <div className="space-y-2">
+                  {integrations.map((integration) => (
+                    <div key={integration.label} className="flex items-start gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="text-sm font-medium">{integration.label}</span>
+                        <span className="text-xs text-muted-foreground ml-2">{integration.detail}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-center gap-2 pt-1 text-xs text-muted-foreground border-t">
+                  <Database className="h-3.5 w-3.5" />
+                  <span>All data synthesized and ready. Two weeks of processing → now we diagnose.</span>
+                </div>
+              </div>
+
+              {/* Objectives */}
+              <div className="rounded-lg border bg-secondary/40 p-4 space-y-2">
+                <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  The Mandate
                 </p>
                 <div className="grid grid-cols-1 gap-2">
                   <div className="flex items-start gap-2 text-sm">
                     <Clock className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                    <span><strong>90-day mandate:</strong> identify and execute the top value-driving AI initiatives before the window closes.</span>
+                    <span><strong>90-day window:</strong> identify and execute the top value-driving initiatives before the window closes.</span>
                   </div>
                   <div className="flex items-start gap-2 text-sm">
                     <TrendingUp className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
@@ -97,12 +164,13 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
                   </div>
                   <div className="flex items-start gap-2 text-sm">
                     <Shield className="h-4 w-4 text-vista-blue mt-0.5 flex-shrink-0" />
-                    <span><strong>Risk objective:</strong> reduce execution and governance risk while scaling AI across the portfolio.</span>
+                    <span><strong>Risk objective:</strong> reduce execution and governance risk — make sure we&apos;re working on what actually matters.</span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              {/* Four-Act Journey */}
+              <div className="space-y-3">
                 <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">
                   The Four-Act Journey
                 </h4>

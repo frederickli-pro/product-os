@@ -16,6 +16,8 @@ export interface InitiativeScore {
   reasoning: string;
 }
 
+export type AutomationType = 'Full Automation' | 'Co-pilot / Augmented' | 'Human-Led + AI';
+
 export interface Initiative {
   id: string;
   name: string;
@@ -23,6 +25,11 @@ export interface Initiative {
   description: string;
   priority: number;
   confidenceScore: number;
+  confidenceFootnote: string;
+  feasibilityScore: number;
+  impactScore: number;
+  automationType: AutomationType;
+  automationFootnote: string;
   scores: InitiativeScore[];
   weightedScore: number;
   reasoning: string[];
@@ -81,6 +88,11 @@ export const initiatives: Initiative[] = [
       'Integrate scheduling and compliance modules into a unified platform with real-time data flow and automated compliance checking.',
     priority: 1,
     confidenceScore: 87,
+    confidenceFootnote: 'Calculated from: 47% of support tickets cite scheduling-compliance friction (14,200 tickets), 3/5 customer interviews validated as #1 pain point, $2.3M ARR churn risk modeled from top-50 enterprise accounts, architecture review confirmed 12-week delivery feasibility.',
+    feasibilityScore: 78,
+    impactScore: 88,
+    automationType: 'Full Automation',
+    automationFootnote: 'Compliance checking, data unification, and anomaly flagging run autonomously. EBITDA capture is direct: reduces support volume and manual compliance overhead without requiring headcount-dependent change management.',
     scores: [
       {
         factor: 'Revenue Impact',
@@ -143,6 +155,11 @@ export const initiatives: Initiative[] = [
       'Intelligent assistant for flight operations with predictive scheduling, anomaly detection, and automated compliance recommendations.',
     priority: 2,
     confidenceScore: 72,
+    confidenceFootnote: 'Calculated from: 78% of B2B SaaS competitors have AI features (competitive scan of 23 companies), 5 customer interviews expressed interest but could not quantify willingness-to-pay, premium tier revenue modeled at $800K ARR upside with ±30% uncertainty. Lower confidence due to dependency on scheduling-compliance foundation not yet built.',
+    feasibilityScore: 42,
+    impactScore: 76,
+    automationType: 'Co-pilot / Augmented',
+    automationFootnote: 'AI surfaces recommendations; human operators make final decisions. EBITDA capture requires behavioral adoption — operators must change workflows to realize efficiency gains. Plan for incentive alignment and change management alongside technical delivery.',
     scores: [
       {
         factor: 'Revenue Impact',
@@ -201,6 +218,11 @@ export const initiatives: Initiative[] = [
       'Complete redesign of mobile application with offline capabilities, push notifications, and streamlined crew workflows.',
     priority: 3,
     confidenceScore: 65,
+    confidenceFootnote: 'Calculated from: mobile adoption at 45% (Mixpanel, 90-day cohort), 18% of support tickets cite mobile limitations, NPS verbatim analysis shows 12% of detractor comments reference mobile. Revenue impact modeled conservatively — mobile-driven expansion revenue is indirect and harder to isolate.',
+    feasibilityScore: 82,
+    impactScore: 62,
+    automationType: 'Human-Led + AI',
+    automationFootnote: 'Primarily a UX redesign with AI-assisted features (smart notifications, usage-based recommendations). Value is realized through adoption behavior change. EBITDA capture path is indirect — measured via expansion revenue and churn reduction over 6+ months.',
     scores: [
       {
         factor: 'Revenue Impact',

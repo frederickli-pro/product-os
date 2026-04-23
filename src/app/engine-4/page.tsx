@@ -7,6 +7,7 @@ import { SDLCStepper } from '@/components/dashboard/sdlc-stepper'
 import { KPIDashboard } from '@/components/engine-4/kpi-dashboard'
 import { ExecutionTimeline } from '@/components/engine-4/execution-timeline'
 import { EscalationQueue } from '@/components/engine-4/escalation-queue'
+import { OrgReadiness } from '@/components/engine-4/org-readiness'
 import { PortfolioIntelligence } from '@/components/engine-4/portfolio-intelligence'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -91,6 +92,16 @@ export default function Engine4Page() {
             items={escalationItems}
             onAction={handleEscalationAction}
           />
+        </motion.div>
+
+        {/* Org Readiness / Change Management */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="mb-6"
+        >
+          <OrgReadiness />
         </motion.div>
 
         {/* Portfolio Intelligence Panel */}

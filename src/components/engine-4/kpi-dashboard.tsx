@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { TrendingUp, TrendingDown, Minus, Info } from 'lucide-react'
+import { TrendingUp, TrendingDown, Minus, Info, DollarSign, Zap, AlertCircle } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -130,6 +130,95 @@ function KPICard({ metric, index }: { metric: KPIMetric, index: number }) {
   )
 }
 
+function EBITDACapturePanel() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5 }}
+    >
+      <Card className="border-vista-blue/30" data-testid="ebitda-capture-panel">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <DollarSign className="w-4 h-4 text-vista-blue" />
+            Value Capture Tracker
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="w-4 h-4 text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="text-xs">
+                    Efficiency created ≠ EBITDA captured. A more efficient workforce only improves the P&L if you
+                    intentionally redirect that capacity — through higher output, headcount reduction, or value-based
+                    pricing. Otherwise, the gains flow to employees or customers.
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Efficiency Created */}
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <Zap className="w-4 h-4 text-blue-600" />
+                <span className="text-sm font-semibold text-blue-800">Efficiency Created</span>
+              </div>
+              <p className="text-3xl font-bold text-blue-700">34%</p>
+              <p className="text-xs text-blue-600">
+                Reduction in manual compliance review time. Sprint rework down from 28% to 9%.
+              </p>
+              <div className="w-full bg-blue-200 rounded-full h-1.5">
+                <div className="h-1.5 rounded-full bg-blue-500" style={{ width: '34%' }} />
+              </div>
+            </div>
+
+            {/* EBITDA Captured */}
+            <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4 text-emerald-600" />
+                <span className="text-sm font-semibold text-emerald-800">EBITDA Captured</span>
+              </div>
+              <p className="text-3xl font-bold text-emerald-700">18%</p>
+              <p className="text-xs text-emerald-600">
+                $420K ARR in churn prevented. Support headcount held flat despite 22% ticket volume reduction.
+              </p>
+              <div className="w-full bg-emerald-200 rounded-full h-1.5">
+                <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: '18%' }} />
+              </div>
+            </div>
+
+            {/* Uncaptured Gap */}
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-amber-600" />
+                <span className="text-sm font-semibold text-amber-800">Gap to Close</span>
+              </div>
+              <p className="text-3xl font-bold text-amber-700">16%</p>
+              <p className="text-xs text-amber-700">
+                Efficiency created but not yet captured. Requires: backfill freeze on 3 roles + output expansion targets.
+              </p>
+              <div className="w-full bg-amber-200 rounded-full h-1.5">
+                <div className="h-1.5 rounded-full bg-amber-500" style={{ width: '16%' }} />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+            <p className="text-xs text-gray-600">
+              <strong>Action required:</strong> A more efficient workforce doesn&apos;t automatically improve the P&L — value created goes to employees or customers unless you capture it intentionally.
+              Either grow output with the same headcount, or reduce headcount as roles are automated.
+              The 16% gap above represents ~$380K annualized EBITDA available but not yet secured.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
 export function KPIDashboard({ metrics }: KPIDashboardProps) {
   return (
     <div className="space-y-4" data-testid="kpi-dashboard">
@@ -144,6 +233,7 @@ export function KPIDashboard({ metrics }: KPIDashboardProps) {
           <KPICard key={metric.id} metric={metric} index={index} />
         ))}
       </div>
+      <EBITDACapturePanel />
     </div>
   )
 }
