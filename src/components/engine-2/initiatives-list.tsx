@@ -61,7 +61,7 @@ export function InitiativesList({
             <button
               onClick={() => onSelectInitiative(initiative)}
               className={cn(
-                'w-full text-left p-4 rounded-lg border transition-all',
+                'w-full text-left p-3 rounded-lg border transition-all',
                 selectedInitiative?.id === initiative.id
                   ? 'border-vista-blue bg-vista-blue/5 shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -69,12 +69,12 @@ export function InitiativesList({
               data-testid={`initiative-${initiative.id}`}
               data-priority={initiative.priority}
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-start justify-between gap-2 min-w-0">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 mb-1 min-w-0">
                     <span
                       className={cn(
-                        'inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold',
+                        'inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold flex-shrink-0',
                         initiative.priority === 1
                           ? 'bg-vista-blue text-white'
                           : 'bg-gray-200 text-gray-700'
@@ -83,33 +83,27 @@ export function InitiativesList({
                     >
                       {initiative.priority}
                     </span>
-                    <span className="font-medium text-sm" data-testid={`initiative-name-${initiative.id}`}>
+                    <span className="font-medium text-sm truncate" data-testid={`initiative-name-${initiative.id}`}>
                       {initiative.name}
                     </span>
                   </div>
-                  <p className="text-xs text-muted-foreground line-clamp-2 ml-8">
+                  <p className="text-xs text-muted-foreground line-clamp-2 ml-6">
                     {initiative.description}
                   </p>
-                  <div className="ml-8 mt-1.5 flex items-center gap-1.5 flex-wrap">
-                    <span
-                      className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600"
-                      data-testid={`initiative-shortname-${initiative.id}`}
-                    >
-                      {initiative.shortName}
-                    </span>
+                  <div className="ml-6 mt-1.5 flex items-center gap-1 flex-wrap">
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <span
                             className={cn(
-                              'text-xs px-2 py-0.5 rounded font-medium cursor-help flex items-center gap-1',
+                              'text-xs px-1.5 py-0.5 rounded font-medium cursor-help flex items-center gap-1 whitespace-nowrap',
                               AUTOMATION_STYLES[initiative.automationType].badge
                             )}
                             data-testid={`automation-badge-${initiative.id}`}
                           >
                             <span
                               className={cn(
-                                'inline-block w-1.5 h-1.5 rounded-full',
+                                'inline-block w-1.5 h-1.5 rounded-full flex-shrink-0',
                                 AUTOMATION_STYLES[initiative.automationType].dot
                               )}
                             />
@@ -123,11 +117,11 @@ export function InitiativesList({
                     </TooltipProvider>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 ml-2">
+                <div className="flex items-center gap-1 ml-1 flex-shrink-0">
                   <div className="text-right">
                     <div
                       className={cn(
-                        'text-lg font-bold',
+                        'text-base font-bold',
                         initiative.confidenceScore >= 80
                           ? 'text-vista-green'
                           : initiative.confidenceScore >= 60
@@ -138,7 +132,7 @@ export function InitiativesList({
                     >
                       {formatPercentage(initiative.confidenceScore)}
                     </div>
-                    <div className="text-xs text-muted-foreground">confidence</div>
+                    <div className="text-xs text-muted-foreground">conf.</div>
                   </div>
                   <ChevronRight
                     className={cn(
