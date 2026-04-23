@@ -245,11 +245,11 @@ export const portfolioPatterns: PortfolioPattern[] = [
   },
   {
     id: 'pattern-2',
-    category: 'Mobile Experience Gaps',
-    pattern: 'Native mobile underinvestment',
-    prevalence: 52,
-    affectedVerticals: ['SaaS', 'Healthcare', 'Logistics'],
-    description: 'Mobile adoption lagging desktop usage across portfolio',
+    category: 'Agentic Workflow Automation',
+    pattern: 'Multi-step customer workflows ripe for agentic automation',
+    prevalence: 61,
+    affectedVerticals: ['B2B SaaS', 'Healthcare', 'Logistics'],
+    description: 'Recurring customer workflows — approvals, data reconciliation, cross-system handoffs — are being automated end-to-end by AI agents, eliminating manual steps and reducing cycle time by 40–70%',
   },
   {
     id: 'pattern-3',
