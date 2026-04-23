@@ -49,13 +49,12 @@ function ParadigmShiftCallout() {
       <div className="space-y-1.5 text-xs text-gray-600">
         <div className="flex gap-1.5">
           <span className="text-gray-400 font-medium flex-shrink-0">Before:</span>
-          <span>Lengthy PRD → hand off to eng → build → validate at the end</span>
+          <span>Empathize → Define → Ideate → lengthy PRD → hand off to eng → build → validate at the end — design thinking front-loaded and then abandoned</span>
         </div>
         <div className="flex gap-1.5">
           <span className="text-vista-blue font-medium flex-shrink-0">Now:</span>
           <span>
-            1-page brief → vibe-coded prototype (48h) → validate with customers → 2-week
-            cycles ship real increments → harden to prod
+            1-page problem brief (Empathize + Define) → vibe-coded prototype in 48h (Ideate + Prototype) → weekly customer sessions watching behavior (Test continuously) → 2-week cycles ship real increments → harden to prod — design thinking embedded in every cycle, not just the front
           </span>
         </div>
       </div>
