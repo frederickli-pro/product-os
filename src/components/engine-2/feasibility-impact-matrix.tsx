@@ -89,25 +89,21 @@ export function FeasibilityImpactMatrix({
         </p>
       </CardHeader>
       <CardContent>
-        {/* Axis labels */}
-        <div className="relative">
-          {/* Y-axis label */}
-          <div className="absolute -left-1 top-1/2 -translate-y-1/2 -translate-x-full pr-2">
+        {/* Axis labels + grid */}
+        <div className="flex gap-2">
+          {/* Y-axis label — sits inside the card flush left */}
+          <div className="flex items-center justify-center w-5 flex-shrink-0">
             <span
-              className="text-xs text-muted-foreground font-medium"
-              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+              className="text-xs text-muted-foreground font-medium select-none"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', whiteSpace: 'nowrap' }}
             >
               Feasibility →
             </span>
           </div>
 
-          {/* X-axis label */}
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2">
-            <span className="text-xs text-muted-foreground font-medium">Impact →</span>
-          </div>
-
+          <div className="flex-1 min-w-0">
           {/* 2x2 Grid */}
-          <div className="grid grid-cols-2 gap-1 ml-4 mb-8">
+          <div className="grid grid-cols-2 gap-1">
             {/* Top-left: Fill-ins (low impact, high feasibility) */}
             <QuadrantCell
               quadrant={quadrants[2]}
@@ -137,15 +133,20 @@ export function FeasibilityImpactMatrix({
               onSelectInitiative={onSelectInitiative}
             />
           </div>
+          {/* X-axis label */}
+          <div className="text-center mt-1">
+            <span className="text-xs text-muted-foreground font-medium">Impact →</span>
+          </div>
+          </div>
         </div>
 
         {/* Legend */}
-        <div className="mt-2 pt-3 border-t space-y-1">
+        <div className="mt-2 pt-3 border-t grid grid-cols-1 sm:grid-cols-3 gap-1">
           {initiatives.map((initiative) => (
             <button
               key={initiative.id}
               onClick={() => onSelectInitiative(initiative)}
-              className={`w-full flex items-center gap-2 text-left text-xs px-2 py-1.5 rounded transition-colors hover:bg-gray-50 ${
+              className={`flex items-center gap-2 text-left text-xs px-2 py-1.5 rounded transition-colors hover:bg-gray-50 ${
                 selectedInitiative?.id === initiative.id ? 'bg-gray-100' : ''
               }`}
             >
@@ -154,8 +155,8 @@ export function FeasibilityImpactMatrix({
               >
                 {initiative.priority}
               </span>
-              <span className="font-medium truncate">{initiative.shortName}</span>
-              <span className="ml-auto text-muted-foreground whitespace-nowrap">
+              <span className="font-medium truncate flex-1">{initiative.shortName}</span>
+              <span className="text-muted-foreground whitespace-nowrap text-right">
                 Impact {initiative.impactScore} · Feasibility {initiative.feasibilityScore}
               </span>
             </button>
@@ -178,7 +179,7 @@ function QuadrantCell({
   onSelectInitiative: (i: Initiative) => void;
 }) {
   return (
-    <div className={`rounded-lg border p-3 min-h-[110px] ${quadrant.color}`}>
+    <div className={`rounded-lg border p-2.5 min-h-[90px] ${quadrant.color}`}>
       <p className={`text-xs font-semibold mb-1 ${quadrant.labelColor}`}>{quadrant.label}</p>
       <p className="text-xs text-muted-foreground mb-2 leading-tight">{quadrant.description}</p>
       <div className="flex flex-wrap gap-1.5">

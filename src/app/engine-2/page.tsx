@@ -85,19 +85,28 @@ export default function Engine2Page() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="col-span-4 space-y-4"
+            className="col-span-4"
           >
-            <FeasibilityImpactMatrix
-              initiatives={initiatives}
-              selectedInitiative={selectedInitiative}
-              onSelectInitiative={setSelectedInitiative}
-            />
             <TradeOffAnalysis
               initiatives={initiatives}
               selectedInitiative={selectedInitiative}
             />
           </motion.div>
         </div>
+
+        {/* Feasibility × Impact Matrix — full-width row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="mb-6"
+        >
+          <FeasibilityImpactMatrix
+            initiatives={initiatives}
+            selectedInitiative={selectedInitiative}
+            onSelectInitiative={setSelectedInitiative}
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
