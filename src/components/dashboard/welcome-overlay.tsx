@@ -12,6 +12,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Play, Compass, TrendingUp, Clock, Shield, CheckCircle2, Database, HelpCircle, AlertTriangle } from 'lucide-react';
+import Link from 'next/link';
 import { getPortfolioCoName } from '@/lib/utils/env-config';
 import {
   Dialog,
@@ -21,7 +22,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { WelcomeOverlayProps } from '@/types/engine';
 
 const actDescriptions = [
@@ -216,11 +217,16 @@ export function WelcomeOverlay({ isOpen, onClose, onStartDemo }: WelcomeOverlayP
                 <Button variant="outline" onClick={onClose}>
                   Explore on my own
                 </Button>
-                <Button onClick={onStartDemo} className="gap-2" data-testid="start-demo-button">
+                <Link
+                  href="/engine-1"
+                  onClick={onStartDemo}
+                  className={buttonVariants({ variant: 'default' }) + ' gap-2'}
+                  data-testid="start-demo-button"
+                >
                   <Play className="h-4 w-4" />
                   Start the Journey
                   <ArrowRight className="h-4 w-4" />
-                </Button>
+                </Link>
               </DialogFooter>
             </div>
           </DialogContent>
